@@ -21,7 +21,7 @@ export const union = (setA: Set<string>, setB: Set<string>) => {
 export const makeSymmetric = (graph: Map<string, Set<string>>) => {
   for (let node of graph.keys()) {
     for (let neighbor in graph.get(node)) {
-      graph.get(neighbor).add(node)
+      graph.get(neighbor)!.add(node)
     }
   }
   return graph

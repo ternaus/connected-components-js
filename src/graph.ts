@@ -6,6 +6,7 @@ class Graph {
 
   constructor() {
     this.graph = new Map<string, Set<string>>();
+    this.components = [new Set()];
   }
 
   computeComponents = () => {
@@ -18,22 +19,24 @@ class Graph {
   }
 
   cutEdge(vertexA: string, vertexB: string) {
-    if (this.graph.get(vertexA)?.has(vertexB)) this.graph.get(vertexA).delete(vertexB);
-    if (this.graph.get(vertexB)?.has(vertexA)) this.graph.get(vertexB).delete(vertexA);
+    if (this.graph.get(vertexA)?.has(vertexB)) this.graph.get(vertexA)!.delete(vertexB);
+    if (this.graph.get(vertexB)?.has(vertexA)) this.graph.get(vertexB)!.delete(vertexA);
   }
 
   cutNode(vertex: string) {
     if (!this.graph.has(vertex)) return;
 
-    this.graph.get(vertex).forEach(neighbor => this.graph.get(neighbor).delete(vertex));
+    this.graph.get(vertex)!.forEach(neighbor => {if (this.graph.has(neighbor)) {
+      this.graph.get(neighbor)!.delete(vertex)
+    }});
     this.graph.delete(vertex);
   }
 
   addEdge(vertexA: string, vertexB: string) {
-    if (this.graph.has(vertexA)) this.graph.get(vertexA).add(vertexB);
+    if (this.graph.has(vertexA)) this.graph.get(vertexA)!.add(vertexB);
     else this.graph.set(vertexA, new Set([vertexB]));
 
-    if (this.graph.has(vertexB)) this.graph.get(vertexB).add(vertexA);
+    if (this.graph.has(vertexB)) this.graph.get(vertexB)!.add(vertexA);
     else this.graph.set(vertexB, new Set([vertexA]));
   }
 
@@ -60,7 +63,7 @@ class Graph {
       let result = new Set<string>([node]);
 
       // Recur for all the vertices adjacent to this vertex
-      for (let neighbor of this.graph.get(node)) {
+      for (let neighbor of this.graph.get(node)!) {
         if (alreadySeen.has(neighbor)) continue;
 
         result = union(result, DFSUtil(neighbor));
