@@ -1,8 +1,12 @@
-# Library to work with undirected graph and it's connected components
+# Library to work with connected components of the undirected graph
 
-## API
+```javascript
+const g = new Graph();
+g.addEdge("a", "b")
+g.addEdges([["a", "d"], ["e", "f"], ["k", "l"]])
 
-## GetNeighbors
-## Cut
-## AddEdge
-## AddNode
+g.addNode("c")
+g.addNodes(["t", "f", "m"])
+
+const components = g.computeComponents()
+```
