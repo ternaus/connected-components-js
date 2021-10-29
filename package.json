@@ -1,0 +1,56 @@
+{
+  "name": "connected-components",
+  "version": "1.0.0",
+  "description": "## API",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc ./node_modules/.bin/_mocha 'tests/**/*.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ternaus/connected-components-js.git"
+  },
+  "author": "Vladimir Iglovikov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ternaus/connected-components-js/issues"
+  },
+  "homepage": "https://github.com/ternaus/connected-components-js#readme",
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.15.8",
+    "@testdeck/mocha": "^0.1.2",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.11.6",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "assert": "^2.0.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "mocha": "^9.1.3",
+    "nyc": "^15.1.0",
+    "prettier": "^2.4.1",
+    "pretty-quick": "^3.1.1",
+    "ts-mockito": "^2.6.1",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.11.0",
+    "typescript": "^4.4.4"
+  },
+  "lint-staged": {
+    "*.{ts}": [
+      "eslint --fix"
+    ]
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": false,
+    "printWidth": 120
+  }
+}
