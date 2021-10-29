@@ -1,6 +1,6 @@
 {
   "name": "connected-components-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "## API",
   "main": "dist/graph.js",
   "types": "dist/graph.d.ts",

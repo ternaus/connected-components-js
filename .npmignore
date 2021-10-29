@@ -1,0 +1,13 @@
+lib/
+.eslintignore
+.eslintrc.json
+.idea/
+.nyrc.json
+.nyc_output/
+tests
+tsconfig.json
+src/
+register.js
+.github/
+.mocharc.json
+node_modules/
