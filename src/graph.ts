@@ -1,4 +1,19 @@
-import { difference, union } from "./utils";
+export const difference = (setA: Set<string>, setB: Set<string>) => {
+  let _difference = new Set(setA);
+  for (let elem of setB) {
+    _difference.delete(elem);
+  }
+  return _difference;
+};
+
+export const union = (setA: Set<string>, setB: Set<string>) => {
+  let _union = new Set(setA);
+  for (let elem of setB) {
+    _union.add(elem);
+  }
+  return _union;
+};
+
 
 class Graph {
   graph: Map<string, Set<string>>;
@@ -26,9 +41,11 @@ class Graph {
   cutNode(vertex: string) {
     if (!this.graph.has(vertex)) return;
 
-    this.graph.get(vertex)!.forEach(neighbor => {if (this.graph.has(neighbor)) {
-      this.graph.get(neighbor)!.delete(vertex)
-    }});
+    this.graph.get(vertex)!.forEach(neighbor => {
+      if (this.graph.has(neighbor)) {
+        this.graph.get(neighbor)!.delete(vertex);
+      }
+    });
     this.graph.delete(vertex);
   }
 

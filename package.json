@@ -1,11 +1,13 @@
 {
-  "name": "connected-components",
+  "name": "connected-components-js",
   "version": "1.0.0",
   "description": "## API",
-  "main": "index.js",
+  "main": "dist/graph.js",
+  "types": "dist/graph.d.ts",
   "scripts": {
     "test": "nyc ./node_modules/.bin/_mocha 'tests/**/*.ts'",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
