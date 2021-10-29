@@ -1,6 +1,7 @@
 # Library to work with connected components of the undirected graph
 
-##Installation
+## Installation
+
 ```bash
 npm install connected-components-js
 ```
