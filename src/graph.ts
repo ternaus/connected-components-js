@@ -4,9 +4,11 @@ class Graph {
   graph: Map<string, Set<string>>;
   components: Set<string>[];
 
-  constructor(graph: Map<string, Set<string>>) {
-    this.graph = graph;
-    console.log("G = ", graph);
+  constructor() {
+    this.graph = new Map<string, Set<string>>();
+  }
+
+  computeComponents = () => {
     this.components = this.get_all_connected_groups();
   }
 
@@ -15,10 +17,26 @@ class Graph {
     return difference(connected, new Set<string>([vertexA]));
   }
 
-  cut() {
+  cut(vertexA: string, vertexB: string) {}
+
+  addEdge(vertexA: string, vertexB: string) {
+    if (this.graph.has(vertexA)) this.graph.get(vertexA).add(vertexB)
+    else this.graph.set(vertexA, new Set([vertexB]))
+
+    if (this.graph.has(vertexB)) this.graph.get(vertexB).add(vertexA)
+    else this.graph.set(vertexB, new Set([vertexA]))
   }
 
-  add(vertexA: string, vertexB: string) {
+  addEdges(input: string[][]) {
+    input.forEach(edge => this.addEdge(edge[0], edge[1]))
+  }
+
+  addNode(vertexA: string) {
+    if (!this.graph.has(vertexA)) this.graph.set(vertexA, new Set([]))
+  }
+
+  addNodes(input: string[]) {
+    input.forEach(node => this.addNode(node))
   }
 
 
