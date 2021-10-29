@@ -6,6 +6,14 @@ export const  difference = (setA: Set<string>, setB: Set<string>) => {
   return _difference
 }
 
+export const union = (setA: Set<string>, setB: Set<string>) => {
+  let _union = new Set(setA)
+  for (let elem of setB) {
+    _union.add(elem)
+  }
+  return _union
+}
+
 /**
  * Make the graph symmetric. I.E. if A is neighbor to B => B is neighbor to A
  * @param graph

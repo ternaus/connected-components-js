@@ -1,4 +1,4 @@
-import { difference } from "./utils";
+import { difference, union } from "./utils";
 
 class Graph {
   graph: Map<string, Set<string>>;
@@ -6,13 +6,13 @@ class Graph {
 
   constructor(graph: Map<string, Set<string>>) {
     this.graph = graph;
-    console.log("G = ", graph)
+    console.log("G = ", graph);
     this.components = this.get_all_connected_groups();
   }
 
   getNeighbors(vertexA: string) {
-    const connected = this.components.filter((component: Set<string>) => component.has(vertexA))[0]
-    return difference(connected, new Set<string>([vertexA]))
+    const connected = this.components.filter((component: Set<string>) => component.has(vertexA))[0];
+    return difference(connected, new Set<string>([vertexA]));
   }
 
   cut() {
@@ -23,35 +23,33 @@ class Graph {
 
 
   private get_all_connected_groups(): Set<string>[] {
-    let result: Set<string>[] = []
-    let alreadySeen = new Set<string>()
+    let alreadySeen = new Set<string>();
 
-    const get_connected_group = (node: string) => {
-      const result = new Set<string>()
-      let nodes = new Set([node])
-      console.log("Nodes before = ", nodes)
-      while (nodes.size > 0) {
-        let node = Array.from(nodes).pop()!
-        alreadySeen.add(node)
-        console.log("Node of interest = ", node, alreadySeen)
-        // nodes = union(nodes, difference(this.graph.get(node)!, alreadySeen))
-        console.log("Neighbors", this.graph.get(node)!)
-        nodes = difference(this.graph.get(node)!, alreadySeen)
-        console.log("Nodes after = ", node, nodes)
-        result.add(node)
-        console.log("Result = ", result)
+    const DFSUtil = (node: string) => {
+      // Mark the current node as visited and print it
+      alreadySeen.add(node);
+
+      let result = new Set<string>([node]);
+
+      // Recur for all the vertices adjacent to this vertex
+      for (let neighbor of this.graph.get(node)) {
+        if (alreadySeen.has(neighbor)) continue;
+
+        result = union(result, DFSUtil(neighbor));
       }
       return result
-    }
+    };
+
+    const result = [];
 
     for (let node of this.graph.keys()) {
-      console.log("Loop node = ", node, alreadySeen)
-      if (alreadySeen.has(node)) continue
+      if (alreadySeen.has(node)) continue;
 
-      const connectedGroup = get_connected_group(node)
-      console.log("connected group = ", connectedGroup, alreadySeen)
-      result.push(connectedGroup)
+      const connectedComponent = DFSUtil(node)
+      result.push(connectedComponent);
     }
+
+    console.log(result)
     return result
   }
 }
